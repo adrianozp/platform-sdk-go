@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adrianozp/platform-sdk-go/queue"
-	"github.com/adrianozp/platform-sdk-go/queue/queuetest"
+	"github.com/klzn-labs/kalzone-sdk-go/queue"
+	"github.com/klzn-labs/kalzone-sdk-go/queue/queuetest"
 )
 
 func serve(h http.Handler, r *http.Request) *httptest.ResponseRecorder {
