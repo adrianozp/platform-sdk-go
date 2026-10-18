@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/adrianozp/platform-sdk-go/queue"
-	"github.com/adrianozp/platform-sdk-go/queue/queuetest"
+	"github.com/klzn-labs/kalzone-sdk-go/queue"
+	"github.com/klzn-labs/kalzone-sdk-go/queue/queuetest"
 )
 
 func Test_PublishJSON_SendsBodyHeadersAndOptions(t *testing.T) {

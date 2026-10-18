@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/adrianozp/platform-sdk-go/queue"
+	"github.com/klzn-labs/kalzone-sdk-go/queue"
 )
 
 type Published struct {

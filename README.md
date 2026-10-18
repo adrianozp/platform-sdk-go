@@ -1,12 +1,12 @@
-# platform-sdk-go
+# kalzone-sdk-go
 
-Go client for the queues of the internal developer platform at
-[platform.kalz.one](https://platform.kalz.one). The platform hands every deployed
+Go client for the queues of [Kalzone](https://platform.kalz.one), the internal
+developer platform. Kalzone hands every deployed
 service `PLATFORM_QUEUE_URL`, `PLATFORM_QUEUE_TOKEN` and `PLATFORM_QUEUE_SIGNING_KEY`;
 this module uses them. Standard library only.
 
 ```sh
-go get github.com/adrianozp/platform-sdk-go/queue
+go get github.com/klzn-labs/kalzone-sdk-go/queue
 ```
 
 ## Publish
