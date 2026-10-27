@@ -47,6 +47,28 @@ mux.Handle("POST /hooks/place-import", h)
 Delivery is at least once: the same message can arrive twice, so handlers must be
 idempotent. `m.ID` is stable across retries and `m.Attempt` counts from 1.
 
+## Cron targets
+
+A Kalzone cron POSTs to a path on your service on its schedule, signed the same
+way as a queue delivery, so `queue.Handler` serves it too:
+
+```go
+mux.Handle("POST /hooks/refresh", queue.Handler(os.Getenv("PLATFORM_QUEUE_SIGNING_KEY"), func(ctx context.Context, m queue.Message) error {
+	var job RefreshJob
+	if err := m.DecodeJSON(&job); err != nil {
+		return queue.Permanent(err)
+	}
+	return refresh(ctx, job, m.Header.Get("Platform-Run-Id"))
+}))
+```
+
+The body is the cron's JSON payload (`{}` when it has none). A cron call has no
+message ID or queue name; read `Platform-Cron`, `Platform-Run-Id` (stable across
+retries of one run), `Platform-Scheduled-At` and `Platform-Attempt` from
+`m.Header`. Answering `nil` ends the run as succeeded, `queue.Permanent` fails it
+at once, and any other error or `queue.RetryAfter` is retried within the cron's
+timeout.
+
 ## Verifying deliveries without this module
 
 Each delivery carries `Platform-Signature: t=<unix seconds>,v1=<hex>`, where the hex
